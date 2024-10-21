@@ -12,7 +12,7 @@ def lambda_handler(event, context):
     
     rolls = [random.randint(1, num_sides) for _ in range(dice_count)]
     
-    logger.info(f"Generated random integer(s): {rolls}")
+    logger.info(f"Generated roll(s): {rolls}")
     
     return {
         "dice_count": rolls

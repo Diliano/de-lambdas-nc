@@ -13,7 +13,6 @@ def test_randint_is_used_to_mock_dice_roll(mock_random):
     assert result == {'dice_count': [3]}
 
 # Test for Task 2
-@pytest.mark.skip
 @patch("src.lambda_func.random.randint", return_value=3)
 def test_lambda_uses_event_to_calculate_dice_rolls(mock_random):
     event = {
