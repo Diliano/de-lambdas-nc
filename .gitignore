@@ -7,3 +7,10 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+
+# venv
+venv
+
+# pycache
+
+*_pycache_*
