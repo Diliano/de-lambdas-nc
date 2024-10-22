@@ -9,7 +9,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 s3 = boto3.client("s3")
-bucket = "dice-rolls-bucket-terraform-nc-2024"
+bucket = "dnd-bucket-terraform-nc-2024"
 
 
 def lambda_handler(event, context):
@@ -21,7 +21,7 @@ def lambda_handler(event, context):
     rolls = [random.randint(1, num_sides) for _ in range(dice_count)]
 
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    key = f"results/{timestamp}.json"
+    key = f"dice-rolls/{timestamp}.json"
     s3.put_object(
         Bucket=bucket,
         Key=key,
@@ -29,8 +29,5 @@ def lambda_handler(event, context):
     )
 
     logger.info(f"Generated roll(s): {rolls}")
-    logger.info(
-        "An extra log, thrown in to test if Terraform detects changes to the function"
-    )
 
     return {"dice_count": rolls}

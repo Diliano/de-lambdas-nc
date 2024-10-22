@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "assume_lambda_role" {
+data "aws_iam_policy_document" "assume_dice_roll_lambda_role" {
   statement {
     effect = "Allow"
 
@@ -11,23 +11,23 @@ data "aws_iam_policy_document" "assume_lambda_role" {
   }
 }
 
-data "aws_iam_policy_document" "lambda_policy" {
+data "aws_iam_policy_document" "dice_roll_lambda_policy" {
   statement {
     effect    = "Allow"
     actions   = ["s3:*"]
-    resources = ["${aws_s3_bucket.dice_rolls_bucket.arn}/*"]
+    resources = ["${aws_s3_bucket.dnd_bucket.arn}/*"]
   }
 }
 
-data "archive_file" "lambda" {
+data "archive_file" "dice_roll_lambda" {
   type        = "zip"
-  source_file = "${path.module}/../src/lambda_func.py"
-  output_path = "${path.module}/../src/lambda_func.zip"
+  source_file = "${path.module}/../src/dice_roll.py"
+  output_path = "${path.module}/../src/dice_roll.zip"
 }
 
 data "aws_caller_identity" "current" {}
 
-data "aws_iam_policy_document" "lambda_logging_policy" {
+data "aws_iam_policy_document" "dice_roll_lambda_logging_policy" {
   statement {
     effect = "Allow"
 
@@ -38,8 +38,8 @@ data "aws_iam_policy_document" "lambda_logging_policy" {
     ]
 
     resources = [
-      "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.lambda_function_name}",
-      "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.lambda_function_name}:*",
+      "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.dice_roll_lambda_function_name}",
+      "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.dice_roll_lambda_function_name}:*",
     ]
   }
 }
