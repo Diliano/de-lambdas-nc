@@ -1,5 +1,5 @@
-# README
+# Data Engineering Bootcamp - AWS Lambda & Terraform
 
-For this sprint, head to Northcoder's L2C app:
+## Overview
 
-https://l2c.northcoders.com/courses/de2-cloud/lambda
+This repository contains work completed as part of the AWS Lambda & Terraform Sprint during my Data Engineering Bootcamp. 
